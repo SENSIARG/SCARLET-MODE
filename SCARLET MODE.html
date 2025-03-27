@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCARLET MODE</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        .card {
+            background: #222;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            color: #ff0000;
+        }
+        h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #ffa726;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 5px;
+        }
+        select, input {
+            background: #333;
+            color: white;
+        }
+        button {
+            background-color: #ff5722;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e64a19;
+        }
+        .status {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #ff9800;
+        }
+        .slider-container {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        .slider {
+            width: 100%;
+        }
+        .slider-value {
+            float: right;
+            font-weight: bold;
+        }
+        .checkbox-container {
+            text-align: left;
+            padding: 10px;
+        }
+        .checkbox-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SCARLET MODE 🇧🇷</h1>
+
+        <!-- MENU SCARLET -->
+        <div class="card">
+            <h2>Menu</h2>
+            <div class="checkbox-container">
+                <label><input type="checkbox" id="autoAim"> Auto Aim</label>
+                <label><input type="checkbox" id="noRecoil"> No Recoil</label>
+                <label><input type="checkbox" id="fastReload"> Fast Reload</label>
+                <label><input type="checkbox" id="aimbot"> AIM BOT</label>
+                <label><input type="checkbox" id="aimfov"> AIM FOV</label>
+            </div>
+
+            <!-- Tambahan Slider AIM FOV -->
+            <div class="slider-container">
+                <label for="aimFovSlider">AIM FOV <span class="slider-value" id="aimFovValue">185</span></label>
+                <input type="range" id="aimFovSlider" class="slider" min="1" max="370" value="185">
+            </div>
+        </div>
+
+        <!-- Pengaturan Sensitivitas & DPI -->
+        <div class="card">
+            <h2>Pengaturan Sensitivitas & DPI</h2>
+
+            <label for="dpiInput">Masukkan DPI:</label>
+            <input type="number" id="dpiInput" placeholder="Masukkan DPI..." min="120" max="600">
+
+            <div class="slider-container">
+                <label for="lookAround">Look Around <span class="slider-value" id="lookAroundValue">100%</span></label>
+                <input type="range" id="lookAround" class="slider" min="0" max="200" value="100">
+            </div>
+
+            <div class="slider-container">
+                <label for="redDotSight">Red Dot Sight <span class="slider-value" id="redDotSightValue">100%</span></label>
+                <input type="range" id="redDotSight" class="slider" min="0" max="200" value="100">
+            </div>
+
+            <div class="slider-container">
+                <label for="scope2x">2x Scope <span class="slider-value" id="scope2xValue">100%</span></label>
+                <input type="range" id="scope2x" class="slider" min="0" max="200" value="100">
+            </div>
+
+            <div class="slider-container">
+                <label for="scope4x">4x Scope <span class="slider-value" id="scope4xValue">100%</span></label>
+                <input type="range" id="scope4x" class="slider" min="0" max="200" value="100">
+            </div>
+
+            <div class="slider-container">
+                <label for="sniperScope">Sniper Scope <span class="slider-value" id="sniperScopeValue">100%</span></label>
+                <input type="range" id="sniperScope" class="slider" min="0" max="200" value="100">
+            </div>
+
+            <div class="slider-container">
+                <label for="freeCamera">Free Camera Button <span class="slider-value" id="freeCameraValue">100%</span></label>
+                <input type="range" id="freeCamera" class="slider" min="0" max="200" value="100">
+            </div>
+        </div>
+
+        <!-- Tombol Injeksi -->
+        <div class="card">
+            <button onclick="injectCheat()">INPUT SCARLET</button>
+            <p class="status" id="statusText"></p>
+        </div>
+    </div>
+
+    <script>
+        function updateSliderValue(sliderId, valueId) {
+            document.getElementById(sliderId).addEventListener("input", function() {
+                document.getElementById(valueId).innerText = this.value + "%";
+            });
+        }
+
+        updateSliderValue("lookAround", "lookAroundValue");
+        updateSliderValue("redDotSight", "redDotSightValue");
+        updateSliderValue("scope2x", "scope2xValue");
+        updateSliderValue("scope4x", "scope4xValue");
+        updateSliderValue("sniperScope", "sniperScopeValue");
+        updateSliderValue("freeCamera", "freeCameraValue");
+
+        function injectCheat() {
+            let dpiValue = document.getElementById("dpiInput").value;
+            let cheats = [];
+            if (document.getElementById("autoAim").checked) cheats.push("Auto Aim");
+            if (document.getElementById("noRecoil").checked) cheats.push("No Recoil");
+            if (document.getElementById("fastReload").checked) cheats.push("Fast Reload");
+            if (document.getElementById("aimbot").checked) cheats.push("AIM BOT");
+            if (document.getElementById("aimfov").checked) cheats.push("AIM FOV");
+
+            let statusText = document.getElementById("statusText");
+            statusText.innerText = "Mengaktifkan SCARLET...";
+
+            setTimeout(() => {
+                statusText.innerText = "Sukses! DPI: " + (dpiValue || "Default") + 
+                                       "\nCheat diaktifkan: " + (cheats.length ? cheats.join(", ") : "Tidak ada");
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hak Cipta Warna-Warni</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .rainbow-text {
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <footer>
+        <p class="rainbow-text" id="copyright">© 2025 SCARLET. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const colors = ["red", "orange", "yellow", "black", "blue", "purple", "cyan"];
+        let index = 0;
+
+        function changeColor() {
+            document.getElementById("copyright").style.color = colors[index];
+            index = (index + 1) % colors.length;
+        }
+
+        setInterval(changeColor, 1000);
+    </script>
+
+</body>
+</html>
